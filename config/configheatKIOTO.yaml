@@ -1,0 +1,67 @@
+experiment: &EXP_NAME Heat_risk_ext_dp
+
+raiz: '/home/gafricano_cps/deeprisk/results/'
+
+ckpt_path: !join [./checkpoints/, *EXP_NAME]
+metric: auc
+outage: 0
+dataset:
+  cases: '/home/gafricano_cps/data/cropped_risk/wu_cases_prev.csv'
+  controls: '/home/gafricano_cps/data/cropped_risk/wu_controls_prev.csv'
+  val_size: 0.4
+  transformations:
+    flip_view: 'R'
+    contours: False
+    clahe: True
+    pixel_noise: 0.005
+    rotation: 4
+    to_tensor: True
+    max_crop_noise: !!python/tuple [70, 70]
+    max_crop_size_noise: 70
+
+
+cropping:
+  cases: '/home/gafricano_cps/data/cropped_risk/data_cases.pkl'
+  controls: '/home/gafricano_cps/data/cropped_risk/data_controls.pkl'
+
+train:
+  num_epochs: 60
+  unfreeze: 100
+  batch_size: &BATCH 4
+  augmentations: True
+
+val:
+  batch_size: *BATCH
+  augmentations: False
+
+logger:
+  state: on
+  path: !join [./runs/, *EXP_NAME]
+
+model:
+  variant: 'view_wise'
+  batch_norm: False
+  use_heatmaps: True
+  finetuning: True
+  flayer: False
+  extended_model: True
+  GPU_use: "cuda:6"
+  image_weights_path: '/home/gafricano_cps/data/models/sample_image_model.p'
+  heatmap_weights_path: '/home/gafricano_cps/data/models/sample_imageheatmaps_model.p'
+  dropout:
+    state: on
+    p: 0.3
+parameters:
+  image_path_cases: '/home/gafricano_cps/data/cropped_risk/cropped_images_cases'
+  image_path_controls: '/home/gafricano_cps/data/cropped_risk/cropped_images_controls'
+  heatmaps_path_cases: '/home/gafricano_cps/data/cropped_risk/heatmaps_cases'
+  heatmaps_path_controls: '/home/gafricano_cps/data/cropped_risk/heatmaps_controls'
+
+optimizer:
+  variant: 'adam'
+  lr: 0.00001
+  weight_decay: '10**(-4.5)'
+
+scheduler:
+    gamma: 1.0
+    step: 10
