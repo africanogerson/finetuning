@@ -1,13 +1,13 @@
 experiment: &EXP_NAME batch_delete
 
-raiz: '/media/bioimag/DATADRIVE/backup/G_africano_master/Wu-finetuning/results/'
+raiz: '/media/bioimag/DATADRIVE/backup/G_africano_master/finetuning/results/'
 
 ckpt_path: !join [./checkpoints/, *EXP_NAME]
 metric: auc
 outage: 0
 dataset:
-  cases: '/media/bioimag/DATADRIVE/backup/wu-normal_previous/sample_data/wu_cases_test.csv'
-  controls: '/media/bioimag/DATADRIVE/backup/wu-normal_previous/sample_data/wu_controls_test.csv'
+  cases: '/media/bioimag/DATADRIVE/backup/Wu-s-network/sample_data/wu_cases_test.csv'
+  controls: '/media/bioimag/DATADRIVE/backup/Wu-s-network/sample_data/wu_controls_test.csv'
   val_size: 0.4
   transformations:
     flip_view: 'R'
