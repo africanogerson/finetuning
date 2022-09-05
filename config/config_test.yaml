@@ -1,13 +1,13 @@
 experiment: &EXP_NAME batch_delete
 
-raiz: '/media/bioimag/DATADRIVE/backup/G_africano_master/finetuning/results/'
+raiz: '/mnt/c/Users/Yesica/Documents/gafricano/finetuning-master/results/'
 
 ckpt_path: !join [./checkpoints/, *EXP_NAME]
 metric: auc
 outage: 0
 dataset:
-  cases: '/media/bioimag/DATADRIVE/backup/Wu-s-network/sample_data/wu_cases_test.csv'
-  controls: '/media/bioimag/DATADRIVE/backup/Wu-s-network/sample_data/wu_controls_test.csv'
+  cases: '/mnt/c/Users/Yesica/Downloads/Wu-s-network-master/sample_data/wu_cases_test.csv'
+  controls: '/mnt/c/Users/Yesica/Downloads/Wu-s-network-master/sample_data/wu_controls_test.csv'
   val_size: 0.4
   transformations:
     flip_view: 'R'
@@ -21,8 +21,8 @@ dataset:
 
 
 cropping:
-  cases: '/media/bioimag/DATADRIVE/backup/wu-normal_previous/sample_output/data_cases.pkl'
-  controls: '/media/bioimag/DATADRIVE/backup/wu-normal_previous/sample_output/data_controls.pkl'
+  cases: '/mnt/c/Users/Yesica/Downloads/Wu-s-network-master/sample_output/data_cases.pkl'
+  controls: '/mnt/c/Users/Yesica/Downloads/Wu-s-network-master/sample_output/data_cases.pkl'
 
 train:
   num_epochs: 3
@@ -41,21 +41,21 @@ logger:
 model:
   variant: 'view_wise'
   batch_norm: False
-  use_heatmaps: True
+  use_heatmaps: False
   finetuning: True
   flayer: False
   extended_model: False
   GPU_use: "cuda:0"
-  image_weights_path: '/media/bioimag/DATADRIVE/backup/deeprisk/breast_cancer_classifier/models/sample_image_model.p'
-  heatmap_weights_path: '/media/bioimag/DATADRIVE/backup/deeprisk/breast_cancer_classifier/models/sample_imageheatmaps_model.p'
+  image_weights_path: '/mnt/c/Users/Yesica/Downloads/Wu-s-network-master/models/sample_image_model.p'
+  heatmap_weights_path: '/mnt/c/Users/Yesica/Downloads/Wu-s-network-master/models/sample_imageheatmaps_model.p'
   dropout:
     state: off
     p: 0.6
 parameters:
-  image_path_cases: '/media/bioimag/DATADRIVE/backup/wu-normal_previous/sample_output/cropped_images_cases'
-  image_path_controls: '/media/bioimag/DATADRIVE/backup/wu-normal_previous/sample_output/cropped_images_controls'
-  heatmaps_path_cases: '/media/bioimag/DATADRIVE/backup/wu-normal_previous/sample_output/heatmaps_cases'
-  heatmaps_path_controls: '/media/bioimag/DATADRIVE/backup/wu-normal_previous/sample_output/heatmaps_controls'
+  image_path_cases: '/mnt/c/Users/Yesica/Downloads/Wu-s-network-master/sample_output/cropped_images_cases'
+  image_path_controls: '/mnt/c/Users/Yesica/Downloads/Wu-s-network-master/sample_output/cropped_images_cases'
+  heatmaps_path_cases: '/mnt/c/Users/Yesica/Downloads/Wu-s-network-master/sample_output/heatmaps_cases'
+  heatmaps_path_controls: '/mnt/c/Users/Yesica/Downloads/Wu-s-network-master/sample_output/heatmaps_controls'
 
 optimizer:
   variant: 'adam'
@@ -65,3 +65,5 @@ optimizer:
 scheduler:
     gamma: 1.0
     step: 10
+ 
+
